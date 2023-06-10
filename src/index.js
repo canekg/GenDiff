@@ -2,12 +2,16 @@ import _ from 'lodash';
 import path from 'path';
 import fs from 'fs';
 
-const getAbsolutPath = (filePath) => path.resolve(process.cwd(), filePath);
-const readFile = (filePath) => fs.readFileSync(getAbsolutPath(filePath), 'utf-8');
-const getObject = (filePath) => JSON.parse(readFile(filePath));
+const readFile = (filePath) => {
+  const fullPath = path.resolve(process.cwd(), filePath);
+  const readData = fs.readFileSync(fullPath, 'utf-8');
+  const object = JSON.parse(readData);
+  return object;
+};
+
 const gendiff = (filePath1, filePath2) => {
-  const file1 = getObject(filePath1);
-  const file2 = getObject(filePath2);
+  const file1 = readFile(filePath1);
+  const file2 = readFile(filePath2);
   const keys = [...Object.keys(file1), ...Object.keys(file2)];
   const uniqueKeys = _.sortBy(_.uniq(keys));
   const result = {};
