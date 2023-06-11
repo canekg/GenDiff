@@ -14,24 +14,24 @@ const gendiff = (filePath1, filePath2) => {
   const file2 = readFile(filePath2);
   const keys = [...Object.keys(file1), ...Object.keys(file2)];
   const uniqueKeys = _.sortBy(_.uniq(keys));
-  const result = {};
+  let result = '';
   uniqueKeys.forEach((key) => {
     if (!Object.hasOwn(file1, [key])) {
-      result[`+ ${key}`] = file2[key];
+      result += `\n+ ${key}: ${file2[key]}`;
       return result;
     }
     if (!Object.hasOwn(file2, [key])) {
-      result[`- ${key}`] = file1[key];
+      result += `\n- ${key}: ${file1[key]}`;
       return result;
     }
     if (file1[key] === file2[key]) {
-      result[`  ${key}`] = file2[key];
+      result += `\n  ${key}: ${file2[key]}`;
     } else {
-      result[`- ${key}`] = file1[key];
-      result[`+ ${key}`] = file2[key];
+      result += `\n- ${key}: ${file1[key]}`;
+      result += `\n+ ${key}: ${file2[key]}`;
     }
     return result;
   });
-  return result;
+  return result.trim();
 };
 export default gendiff;
