@@ -32,6 +32,6 @@ const gendiff = (filePath1, filePath2) => {
     }
     return result;
   });
-  return result.trim();
+  return `{\n${result.trim()}\n}`;
 };
 export default gendiff;
