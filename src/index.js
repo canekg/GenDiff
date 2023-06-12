@@ -8,7 +8,6 @@ const readFile = (filePath) => {
   const object = JSON.parse(readData);
   return object;
 };
-
 const gendiff = (filePath1, filePath2) => {
   const file1 = readFile(filePath1);
   const file2 = readFile(filePath2);
