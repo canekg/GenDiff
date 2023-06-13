@@ -10,9 +10,13 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 const file1 = './__fixtures__/file1.json';
 const file2 = './__fixtures__/file2.json';
+const file3 = './__fixtures__/file1.yml';
+const file4 = './__fixtures__/file2.yml';
 const correctResult = readFile('result.txt');
 
 test('genDiff', () => {
   const actual1 = genDiff(file1, file2);
   expect(actual1).toStrictEqual(correctResult);
+  const actual2 = genDiff(file3, file4);
+  expect(actual2).toStrictEqual(correctResult);
 });
