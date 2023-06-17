@@ -8,5 +8,9 @@
 
 <a href="https://codeclimate.com/github/canekg/frontend-project-46/test_coverage"><img src="https://api.codeclimate.com/v1/badges/a76706bc4afe944ef2f9/test_coverage" /></a>
 
-**gendiff**
+**gendiff(format .json)**
 [![asciicast](https://asciinema.org/a/DfaL9Ve6VFgoagdnzPTO4Fjpj.svg)](https://asciinema.org/a/DfaL9Ve6VFgoagdnzPTO4Fjpj)
+
+**gendiff(format .yml)**
+[![asciicast](https://asciinema.org/a/lZEEs0NLNWThbzU4SK53cEPAJ.svg)](https://asciinema.org/a/lZEEs0NLNWThbzU4SK53cEPAJ)
+
