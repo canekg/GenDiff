@@ -12,11 +12,16 @@ const file1 = './__fixtures__/file1.json';
 const file2 = './__fixtures__/file2.json';
 const file3 = './__fixtures__/file1.yml';
 const file4 = './__fixtures__/file2.yml';
-const correctResult = readFile('result.txt');
+const correctFormatStylish = readFile('resultFormatStylish.txt');
+const correctFormatPlain = readFile('resultFormatPlain.txt');
 
 test('genDiff', () => {
   const actual1 = genDiff(file1, file2);
-  expect(actual1).toStrictEqual(correctResult);
+  expect(actual1).toStrictEqual(correctFormatStylish);
   const actual2 = genDiff(file3, file4);
-  expect(actual2).toStrictEqual(correctResult);
+  expect(actual2).toStrictEqual(correctFormatStylish);
+  const actual3 = genDiff(file1, file2, 'plain');
+  expect(actual3).toStrictEqual(correctFormatPlain);
+  const actual4 = genDiff(file3, file4, 'plain');
+  expect(actual4).toStrictEqual(correctFormatPlain);
 });
