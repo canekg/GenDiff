@@ -1,36 +1,20 @@
-import _ from 'lodash';
 import path from 'path';
 import fs from 'fs';
+import parse from './parse.js';
+import formatStylish from './formatters/stylish.js';
+import getTree from './diffTree.js';
 
 const readFile = (filePath) => {
   const fullPath = path.resolve(process.cwd(), filePath);
   const readData = fs.readFileSync(fullPath, 'utf-8');
-  const object = JSON.parse(readData);
+  const object = parse(readData, filePath);
   return object;
 };
-const gendiff = (filePath1, filePath2) => {
+
+const gendiff = (filePath1, filePath2, formatName = 'stylish') => {
   const file1 = readFile(filePath1);
   const file2 = readFile(filePath2);
-  const keys = [...Object.keys(file1), ...Object.keys(file2)];
-  const uniqueKeys = _.sortBy(_.uniq(keys));
-  let result = '';
-  uniqueKeys.forEach((key) => {
-    if (!Object.hasOwn(file1, [key])) {
-      result += `\n+ ${key}: ${file2[key]}`;
-      return result;
-    }
-    if (!Object.hasOwn(file2, [key])) {
-      result += `\n- ${key}: ${file1[key]}`;
-      return result;
-    }
-    if (file1[key] === file2[key]) {
-      result += `\n  ${key}: ${file2[key]}`;
-    } else {
-      result += `\n- ${key}: ${file1[key]}`;
-      result += `\n+ ${key}: ${file2[key]}`;
-    }
-    return result;
-  });
-  return `{\n${result.trim()}\n}`;
+  const tree = getTree(file1, file2);
+  return formatStylish(tree, formatName);
 };
 export default gendiff;
