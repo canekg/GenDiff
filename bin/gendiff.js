@@ -13,7 +13,10 @@ program
 program
   .argument('<filepath1>')
   .argument('<filepath2>')
-  .option('-f, --format <type>', 'output format')
+  .option('-f, --format <type>', 'output format', 'stylish')
   // eslint-disable-next-line no-console
-  .action((filepath1, filepath2) => console.log(genDiff(filepath1, filepath2)));
+  .action((filepath1, filepath2) => {
+    const option = program.opts();
+    console.log(genDiff(filepath1, filepath2, option.format));
+  });
 program.parse();
