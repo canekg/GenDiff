@@ -1,4 +1,4 @@
-### Hexlet tests, Node CI, maintainability and test coverage:
+### Hexlet tests, Node CI, maintainability, test coverage:
 
 [![Actions Status](https://github.com/canekg/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/canekg/frontend-project-46/actions)
 
