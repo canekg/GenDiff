@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const val = (value) => {
+const getValue = (value) => {
   if (_.isString(value)) {
     return `'${value}'`;
   }
@@ -25,9 +25,9 @@ const iter = (diff, path) => diff
       case 'deleted':
         return `Property '${currentPath}' was removed`;
       case 'added':
-        return `Property '${currentPath}' was added with value: ${val(node.value)}`;
+        return `Property '${currentPath}' was added with value: ${getValue(node.value)}`;
       case 'changed': {
-        return `Property '${currentPath}' was updated. From ${val(node.value1)} to ${val(node.value2)}`;
+        return `Property '${currentPath}' was updated. From ${getValue(node.value1)} to ${getValue(node.value2)}`;
       }
       case 'nested': {
         const lines = iter(node.children, currentPath);
