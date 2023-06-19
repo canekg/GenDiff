@@ -2,6 +2,8 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import genDiff from '../src/index.js';
+import parsers from '../src/parsers.js';
+import getFormat from '../src/formatters/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -29,4 +31,12 @@ test('genDiff', () => {
   expect(actual5).toStrictEqual(correctFormatJson);
   const actual6 = genDiff(file3, file4, 'json');
   expect(actual6).toStrictEqual(correctFormatJson);
+});
+test('testing throw parsers', () => {
+  const data = '{ "key": "value" }';
+  expect(() => parsers(data, 'file2.txt')).toThrow('Unknown format! .txt');
+});
+test('testing throw formatters', () => {
+  const data = { key: 'value' };
+  expect(() => getFormat(data, 'unix')).toThrow('Unknown format! unix');
 });
