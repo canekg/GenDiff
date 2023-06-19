@@ -1,13 +1,13 @@
 import path from 'path';
 import fs from 'fs';
-import parse from './parsers.js';
+import parsers from './parsers.js';
 import getFormat from './formatters/index.js';
 import getTree from './diffTree.js';
 
 const readFile = (filePath) => {
   const fullPath = path.resolve(process.cwd(), filePath);
   const readData = fs.readFileSync(fullPath, 'utf-8');
-  const object = parse(readData, filePath);
+  const object = parsers(readData, filePath);
   return object;
 };
 

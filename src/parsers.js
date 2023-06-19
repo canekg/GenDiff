@@ -1,7 +1,7 @@
 import path from 'path';
 import yaml from 'js-yaml';
 
-const parse = (data, filePath) => {
+const parsers = (data, filePath) => {
   const extension = path.extname(filePath);
   switch (extension) {
     case '.json':
@@ -14,4 +14,4 @@ const parse = (data, filePath) => {
       throw new Error(`'Unknown format! ${extension}'`);
   }
 };
-export default parse;
+export default parsers;
