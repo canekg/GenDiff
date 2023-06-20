@@ -31,9 +31,29 @@ $ gendiff -h
 
 ### Start Difference Calculator
 
+#### Output default format 'stylish'
+
 ```bash
-$ gendiff [options] <filepath1> <filepath2>
+$ gendiff ./__fixtures__/file1.json ./__fixtures__/file2.json
+$ gendiff ./__fixtures__/file1.yml ./__fixtures__/file2.yml
 ```
+
+#### Output format 'plain'
+
+```bash
+$ gendiff -f 'plain' ./__fixtures__/file1.json ./__fixtures__/file2.json
+$ gendiff -f 'plain' ./__fixtures__/file1.yml ./__fixtures__/file2.yml
+```
+
+#### Output format 'json'
+
+```bash
+$ gendiff -f 'json' ./__fixtures__/file1.json ./__fixtures__/file2.json
+$ gendiff -f 'json' ./__fixtures__/file1.yml ./__fixtures__/file2.yml
+```
+
+**Demo display help for command**
+[![asciicast](https://asciinema.org/a/kUu4QlatbkNE5x2kZHEjAOxvM.svg)](https://asciinema.org/a/kUu4QlatbkNE5x2kZHEjAOxvM)
 
 **Demo of the Difference Calculator (example input formats: .json, .yml)**
 [![asciicast](https://asciinema.org/a/ohdvDnTNfjRcDkLNfISek6omN.svg)](https://asciinema.org/a/ohdvDnTNfjRcDkLNfISek6omN)
