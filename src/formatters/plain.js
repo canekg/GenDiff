@@ -10,11 +10,11 @@ const getValue = (value) => {
   return value;
 };
 
-const getFullPath = (path, currentPath) => {
+const getFullPath = (key, currentPath) => {
   if (currentPath !== '') {
-    return `${currentPath}.${path}`;
+    return `${currentPath}.${key}`;
   }
-  return `${path}`;
+  return `${key}`;
 };
 
 const iter = (diff, path) => diff
