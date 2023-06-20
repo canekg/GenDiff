@@ -11,10 +11,10 @@ const readFile = (filePath) => {
   return object;
 };
 
-const gendiff = (filePath1, filePath2, formatName = 'stylish') => {
+const genDiff = (filePath1, filePath2, formatName = 'stylish') => {
   const file1 = readFile(filePath1);
   const file2 = readFile(filePath2);
   const tree = getTree(file1, file2);
   return getFormat(tree, formatName);
 };
-export default gendiff;
+export default genDiff;
