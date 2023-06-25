@@ -33,10 +33,8 @@ test('genDiff', () => {
   expect(actual6).toStrictEqual(correctFormatJson);
 });
 test('testing throw parsers', () => {
-  const data = '{ "key": "value" }';
-  expect(() => parsers(data, 'file2.txt')).toThrow('Unknown format! .txt');
+  expect(parsers('txt')).toStrictEqual('Unknown format! txt');
 });
 test('testing throw formatters', () => {
-  const data = { key: 'value' };
-  expect(() => getFormat(data, 'unix')).toThrow('Unknown format! unix');
+  expect(getFormat('unix')).toStrictEqual('Unknown format! unix');
 });
