@@ -32,7 +32,8 @@ test.each(data)('testing throw gendiff', (a, b, c, expected) => {
 });
 
 test('testing throw parsers', () => {
-  expect(parsers('txt')).toStrictEqual('Unknown format! txt');
+  const readData = [{ key: 'group2', type: 'deleted', value: { abc: 12345, deep: [Object] } }];
+  expect(parsers(readData, 'txt')).toStrictEqual('Unknown format! txt');
 });
 test('testing throw formatters', () => {
   const tree = [{ key: 'group2', type: 'deleted', value: { abc: 12345, deep: [Object] } }];
