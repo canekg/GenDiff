@@ -18,23 +18,23 @@ const correctFormatStylish = readFile('resultFormatStylish.txt');
 const correctFormatPlain = readFile('resultFormatPlain.txt');
 const correctFormatJson = readFile('resultFortmatJson.txt');
 
-test('genDiff', () => {
-  const actual1 = genDiff(file1, file2);
-  expect(actual1).toStrictEqual(correctFormatStylish);
-  const actual2 = genDiff(file3, file4);
-  expect(actual2).toStrictEqual(correctFormatStylish);
-  const actual3 = genDiff(file1, file2, 'plain');
-  expect(actual3).toStrictEqual(correctFormatPlain);
-  const actual4 = genDiff(file3, file4, 'plain');
-  expect(actual4).toStrictEqual(correctFormatPlain);
-  const actual5 = genDiff(file1, file2, 'json');
-  expect(actual5).toStrictEqual(correctFormatJson);
-  const actual6 = genDiff(file3, file4, 'json');
-  expect(actual6).toStrictEqual(correctFormatJson);
+const data = [
+  [file1, file2, 'stylish', correctFormatStylish],
+  [file1, file2, 'plain', correctFormatPlain],
+  [file1, file2, 'json', correctFormatJson],
+  [file3, file4, 'stylish', correctFormatStylish],
+  [file3, file4, 'plain', correctFormatPlain],
+  [file3, file4, 'json', correctFormatJson],
+];
+
+test.each(data)('testing throw gendiff', (a, b, c, expected) => {
+  expect(genDiff(a, b, c)).toBe(expected);
 });
+
 test('testing throw parsers', () => {
   expect(parsers('txt')).toStrictEqual('Unknown format! txt');
 });
 test('testing throw formatters', () => {
-  expect(getFormat('unix')).toStrictEqual('Unknown format! unix');
+  const tree = [{ key: 'group2', type: 'deleted', value: { abc: 12345, deep: [Object] } }];
+  expect(getFormat(tree, 'unix')).toStrictEqual('Unknown format! unix');
 });
