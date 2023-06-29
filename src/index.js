@@ -5,11 +5,11 @@ import getFormat from './formatters/index.js';
 import getTree from './diffTree.js';
 
 const getFullPath = (filePath) => path.resolve(process.cwd(), filePath);
-const formatType = (filePath) => path.extname(filePath).slice(1);
+const getFormatType = (filePath) => path.extname(filePath).slice(1);
 
 const readFile = (filePath) => {
   const readData = fs.readFileSync(getFullPath(filePath), 'utf-8');
-  return parsers(readData, formatType(filePath));
+  return parsers(readData, getFormatType(filePath));
 };
 
 const genDiff = (filePath1, filePath2, formatType = 'stylish') => {
