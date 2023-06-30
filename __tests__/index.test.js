@@ -7,35 +7,25 @@ import getFormat from '../src/formatters/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
-const file1 = './__fixtures__/file1.json';
-const file2 = './__fixtures__/file2.json';
-const file3 = './__fixtures__/file1.yml';
-const file4 = './__fixtures__/file2.yml';
-const correctFormatStylish = readFile('resultFormatStylish.txt');
-const correctFormatPlain = readFile('resultFormatPlain.txt');
-const correctFormatJson = readFile('resultFortmatJson.txt');
+const formats = ['json', 'yml'];
 
-const data = [
-  [file1, file2, 'stylish', correctFormatStylish],
-  [file1, file2, 'plain', correctFormatPlain],
-  [file1, file2, 'json', correctFormatJson],
-  [file3, file4, 'stylish', correctFormatStylish],
-  [file3, file4, 'plain', correctFormatPlain],
-  [file3, file4, 'json', correctFormatJson],
-];
-
-test.each(data)('testing throw gendiff', (a, b, c, expected) => {
-  expect(genDiff(a, b, c)).toBe(expected);
+test.each(formats)('testing throw gendiff', (format) => {
+  const filePath1 = getFixturePath(`file1.${format}`);
+  const filePath2 = getFixturePath(`file2.${format}`);
+  const stylishResult = readFile('stylishResult.txt');
+  const plainResult = readFile('plainResult.txt');
+  const jsonResult = readFile('jsonResult.txt');
+  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(stylishResult);
+  expect(genDiff(filePath1, filePath2, 'plain')).toEqual(plainResult);
+  expect(genDiff(filePath1, filePath2, 'json')).toEqual(jsonResult);
 });
-
 test('testing throw parsers', () => {
   const readData = [{ key: 'group2', type: 'deleted', value: { abc: 12345, deep: [Object] } }];
-  expect(parsers(readData, 'txt')).toStrictEqual('Unknown format! txt');
+  expect(parsers(readData, 'txt')).toEqual('Unknown format! txt');
 });
 test('testing throw formatters', () => {
   const tree = [{ key: 'group2', type: 'deleted', value: { abc: 12345, deep: [Object] } }];
-  expect(getFormat(tree, 'unix')).toStrictEqual('Unknown format! unix');
+  expect(getFormat(tree, 'unix')).toEqual('Unknown format! unix');
 });
