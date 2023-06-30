@@ -10,7 +10,7 @@ const stringify = (value) => {
   if (value === null) {
     return value;
   }
-  return value;
+  return String(value);
 };
 
 const getFullPath = (key, currentPath) => (!currentPath ? `${key}` : `${currentPath}.${key}`);
